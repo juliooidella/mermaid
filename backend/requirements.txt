@@ -1,0 +1,9 @@
+Flask>=2.0
+Authlib>=1.0
+requests>=2.20
+python-dotenv>=0.15
+psycopg2-binary>=2.9 # Assuming PostgreSQL for the DB
+Flask-Session>=0.4 # For server-side sessions (alternative to client-side)
+Flask-Sockets>=0.2.1
+gevent>=21.0 # Or meinheld, for Flask-Sockets if not using Flask dev server
+gevent-websocket>=0.10.1 # For gevent WebSocket server

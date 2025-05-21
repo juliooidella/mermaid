@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mermaid Diagram Editor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#" id="home-link">Home</a>
+            <a href="#" id="projects-link">My Projects</a>
+            <div id="auth-buttons">
+                <button id="login-btn">Login with Google</button>
+                <button id="logout-btn" style="display: none;">Logout</button>
+            </div>
+            <div id="user-info" style="display: none;">
+                Logged in as: <span id="username-display"></span>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Initial View / Welcome Page -->
+        <section id="welcome-view" class="view">
+            <h1>Welcome to the Mermaid Diagram Editor</h1>
+            <p>Please login to manage your projects and diagrams.</p>
+        </section>
+
+        <!-- Projects List View -->
+        <section id="projects-view" class="view" style="display: none;">
+            <h2>My Projects</h2>
+            <button id="create-project-btn">Create New Project</button>
+            <ul id="project-list">
+                <!-- Projects will be listed here -->
+            </ul>
+        </section>
+
+        <!-- Diagrams List View (for a specific project) -->
+        <section id="diagrams-view" class="view" style="display: none;">
+            <h2 id="project-name-header">Diagrams in Project: <span></span></h2>
+            <button id="back-to-projects-btn">Back to Projects</button>
+            <button id="create-diagram-btn">Create New Diagram</button>
+            <ul id="diagram-list">
+                <!-- Diagrams will be listed here -->
+            </ul>
+        </section>
+
+        <!-- Editor View (for a specific diagram) -->
+        <section id="editor-view" class="view" style="display: none;">
+            <h2 id="diagram-name-header">Editing: <span></span></h2>
+            <button id="back-to-diagrams-btn">Back to Diagrams</button>
+            <div class="editor-container">
+                <div class="mermaid-input-area">
+                    <label for="mermaid-code">Mermaid Code:</label>
+                    <textarea id="mermaid-code" rows="15"></textarea>
+                    <button id="save-diagram-btn">Save Diagram</button>
+                </div>
+                <div class="mermaid-output-area">
+                    <label>Rendered Diagram:</label>
+                    <div id="mermaid-output" class="mermaid">
+                        <!-- Mermaid.js will render diagram here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Mermaid Diagram Editor</p>
+    </footer>
+
+    <!-- Include Mermaid.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({ startOnLoad: false });</script>
+
+    <script src="api.js"></script>
+    <script src="ui.js"></script>
+    <script src="socketService.js"></script> <!-- Load SocketService before app.js -->
+    <script src="app.js"></script>
+</body>
+</html>

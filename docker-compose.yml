@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:13-alpine
+    container_name: mermaid_db
+    environment:
+      POSTGRES_USER: user # Replace with your desired DB user
+      POSTGRES_PASSWORD: password # Replace with your desired DB password
+      POSTGRES_DB: mydatabase # Replace with your desired DB name
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql # Mount init script
+    ports:
+      - "5432:5432" # Expose DB port to host (optional, for external tools)
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d mydatabase"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: mermaid_backend
+    ports:
+      - "5000:5000"
+    environment:
+      # --- Critical: User must provide these ---
+      # GOOGLE_CLIENT_ID: "YOUR_GOOGLE_CLIENT_ID_HERE"
+      # GOOGLE_CLIENT_SECRET: "YOUR_GOOGLE_CLIENT_SECRET_HERE"
+      
+      # --- Security: Change for production ---
+      FLASK_SECRET_KEY: "a_very_secret_key_for_development_only" # CHANGE THIS IN PRODUCTION!
+
+      # --- Database Connection ---
+      DATABASE_URL: "postgresql://user:password@db:5432/mydatabase" # Matches 'db' service credentials
+
+      # --- Flask/Gunicorn Settings ---
+      FLASK_ENV: "development" # "production" for production builds
+      PORT: "5000" # Port Gunicorn will listen on inside the container
+      
+      # PYTHONUNBUFFERED: 1 # Already set in backend/Dockerfile
+    volumes:
+      - ./backend:/app # Live reloading for backend code
+    depends_on:
+      db:
+        condition: service_healthy # Wait for db to be healthy
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: mermaid_frontend
+    ports:
+      - "8080:80" # Map Nginx port 80 to host port 8080
+    volumes:
+      - ./frontend:/usr/share/nginx/html # Live reloading for frontend files
+    # depends_on:
+    #   - backend # Optional: if frontend had a build step needing backend or for startup order
+    restart: unless-stopped
+
+volumes:
+  pg_data: # Named volume for PostgreSQL data persistence

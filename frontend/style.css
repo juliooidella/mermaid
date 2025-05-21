@@ -1,0 +1,210 @@
+/* General Body Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header and Navigation */
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+}
+
+nav a:hover {
+    background-color: #555;
+    border-radius: 4px;
+}
+
+#auth-buttons button, #user-info {
+    color: #fff;
+    margin-left: 1rem;
+}
+
+#auth-buttons button {
+    background-color: #007bff;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+#auth-buttons button:hover {
+    background-color: #0056b3;
+}
+
+/* Main Content Area */
+main {
+    padding: 1rem;
+    max-width: 1000px;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.view {
+    padding: 1rem;
+}
+
+/* Section Specific Styles */
+#welcome-view {
+    text-align: center;
+}
+
+/* Project and Diagram Lists */
+#project-list, #diagram-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+#project-list li, #diagram-list li {
+    background-color: #e9e9e9;
+    margin-bottom: 8px;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#project-list li:hover, #diagram-list li:hover {
+    background-color: #d3d3d3;
+}
+
+/* Buttons */
+button {
+    padding: 0.7rem 1.5rem;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 0.5rem 0;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+#create-project-btn, #create-diagram-btn {
+    margin-bottom: 1rem;
+}
+
+/* Editor View */
+.editor-container {
+    display: flex;
+    gap: 20px;
+    margin-top: 1rem;
+}
+
+.mermaid-input-area, .mermaid-output-area {
+    flex: 1;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+}
+
+textarea#mermaid-code {
+    width: 95%; /* Adjust as needed */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: monospace;
+    resize: vertical;
+}
+
+#mermaid-output {
+    min-height: 200px; /* Ensure it has some height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff; /* White background for the diagram */
+    border: 1px solid #ddd;
+    padding: 10px;
+    box-sizing: border-box;
+    overflow: auto; /* Add scrollbars if SVG is too big */
+}
+
+.mermaid-placeholder, .mermaid-loading {
+    color: #888;
+    font-style: italic;
+}
+
+.mermaid-error {
+    background-color: #ffebee; /* Light red background */
+    color: #c62828; /* Darker red text */
+    border: 1px solid #ef9a9a; /* Red border */
+    padding: 15px;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.mermaid-error strong {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1.1em;
+}
+
+.mermaid-error p {
+    margin-bottom: 10px;
+}
+
+.mermaid-error details {
+    margin-top: 10px;
+    background-color: #f9f9f9;
+    padding: 5px;
+    border: 1px solid #eee;
+}
+
+.mermaid-error summary {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.mermaid-error pre {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-top: 5px;
+    overflow-x: auto; /* Scroll for long lines of code */
+    white-space: pre-wrap; /* Wrap long lines */
+    word-break: break-all;
+}
+
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: #333;
+    color: #fff;
+}
+
+/* Utility class to hide views */
+.hidden {
+    display: none !important;
+}
